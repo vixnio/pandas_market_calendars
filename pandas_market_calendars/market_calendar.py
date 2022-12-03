@@ -18,7 +18,7 @@ from abc import ABCMeta, abstractmethod
 from datetime import time
 
 import pandas as pd
-from pandas.tseries.offsets import CustomBusinessDay
+from pandas.tseries.offsets import CustomBusinessDay, Hour
 
 from .class_registry import RegisteryMeta, ProtectedDict
 
@@ -630,7 +630,7 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
             schedule.loc[_open_adj] = adjusted
 
             adjusted = schedule.loc[_close_adj].apply(
-                lambda x: x.where(x.le(x["market_close"]), x["market_close"]), axis= 1)
+                lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
             schedule.loc[_close_adj] = adjusted
 
         if interruptions:
