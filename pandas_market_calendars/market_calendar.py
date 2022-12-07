@@ -624,14 +624,26 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
 
             schedule[market_time] = temp
 
-        if _adj_others:
-            adjusted = schedule.loc[_open_adj].apply(
-                lambda x: x.where(x.ge(x["market_open"]), x["market_open"]), axis= 1)
-            schedule.loc[_open_adj] = adjusted
+        with warnings.catch_warnings():
+            # Setting values in-place is fine, ignore the warning in Pandas >= 1.5.0
+            # This can be removed, if Pandas 1.5.0 does not need to be supported any longer.
+            # See also: https://stackoverflow.com/q/74057367/859591
+            warnings.filterwarnings(
+                "ignore",
+                category=FutureWarning,
+                message=(
+                    ".*will attempt to set the values inplace instead of always setting a new array. "
+                    "To retain the old behavior, use either.*"
+                ),
+            )
+            if _adj_others:
+                adjusted = schedule.loc[_open_adj].apply(
+                    lambda x: x.where(x.ge(x["market_open"]), x["market_open"]), axis= 1)
+                schedule.loc[_open_adj] = adjusted
 
-            adjusted = schedule.loc[_close_adj].apply(
-                lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
-            schedule.loc[_close_adj] = adjusted
+                adjusted = schedule.loc[_close_adj].apply(
+                    lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
+                schedule.loc[_close_adj] = adjusted
 
         if interruptions:
             interrs = self.interruptions_df
