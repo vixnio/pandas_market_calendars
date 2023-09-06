@@ -660,9 +660,14 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
                     lambda x: x.where(x.ge(x["market_open"]), x["market_open"]), axis= 1)
                 schedule.loc[_open_adj] = adjusted
 
-                adjusted = schedule.loc[_close_adj].apply(
-                    lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
-                schedule.loc[_close_adj] = adjusted
+                if any(schedule.columns.isin(["pre", "post"])):
+                    adjusted = schedule.loc[_close_adj].apply(
+                        lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
+                    schedule.loc[_close_adj] = adjusted
+                else:
+                    adjusted = schedule.loc[_close_adj].apply(
+                        lambda x: x.where(x.le(x["market_close"]), x["market_close"]), axis= 1)
+                    schedule.loc[_close_adj] = adjusted
 
         if interruptions:
             interrs = self.interruptions_df
