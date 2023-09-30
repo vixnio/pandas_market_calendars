@@ -15,6 +15,7 @@
 from datetime import time
 from itertools import chain
 from pytz import timezone
+from zoneinfo import ZoneInfo
 import pickle
 
 
@@ -1147,7 +1148,7 @@ def test_mirror():
 def test_basic_information():
 
     assert mcal_iepa._EC_NOT_INITIALIZED
-    assert mcal_iepa.tz == timezone("America/New_York") == ecal_iepa.tz
+    assert mcal_iepa.tz == ZoneInfo("America/New_York") == ecal_iepa.tz
     assert mcal_iepa.open_offset == -1 == ecal_iepa.open_offset
     assert mcal_iepa.open_time == time(20)
     assert mcal_iepa.close_time == time(18)
