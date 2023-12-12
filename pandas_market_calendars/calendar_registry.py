@@ -15,6 +15,7 @@ from .calendars.cme_globex_fx import CMEGlobexFXExchangeCalendar
 from .calendars.cme_globex_fixed_income import CMEGlobexFixedIncomeCalendar
 from .calendars.eurex import EUREXExchangeCalendar
 from .calendars.hkex import HKEXExchangeCalendar
+from .calendars.ib_fx import IBForexExchangeCalendar
 from .calendars.ice import ICEExchangeCalendar
 from .calendars.iex import IEXExchangeCalendar
 from .calendars.jpx import JPXExchangeCalendar
