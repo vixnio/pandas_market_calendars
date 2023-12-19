@@ -1,5 +1,5 @@
 from datetime import time
-from pytz import timezone
+from zoneinfo import ZoneInfo
 
 from pandas.tseries.holiday import AbstractHolidayCalendar
 from pandas_market_calendars.holidays.us import (
@@ -24,7 +24,7 @@ class DukascopyForexExchangeCalendar(MarketCalendar):
 
     @property
     def tz(self):
-        return timezone("US/Eastern")
+        return ZoneInfo("US/Eastern")
 
     @property
     def regular_holidays(self):
