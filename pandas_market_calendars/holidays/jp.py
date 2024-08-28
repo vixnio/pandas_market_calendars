@@ -2,26 +2,30 @@ from dateutil.relativedelta import MO
 from pandas import DateOffset, Timestamp
 from pandas.tseries.holiday import Holiday, sunday_to_monday
 
-from pandas_market_calendars.holidays.jpx_equinox import autumnal_citizen_dates, autumnal_equinox, vernal_equinox
+from pandas_market_calendars.holidays.jpx_equinox import (
+    autumnal_citizen_dates,
+    autumnal_equinox,
+    vernal_equinox,
+)
 
 AscensionDays = [
-    Timestamp('2019-04-30', tz='UTC'),  # National Holiday
-    Timestamp('2019-05-01', tz='UTC'),  # Ascension Day
-    Timestamp('2019-05-02', tz='UTC'),  # National Holiday
+    Timestamp("2019-04-30", tz="UTC"),  # National Holiday
+    Timestamp("2019-05-01", tz="UTC"),  # Ascension Day
+    Timestamp("2019-05-02", tz="UTC"),  # National Holiday
 ]
 
 MarriageDays = [
-    Timestamp('1959-04-10', tz='UTC'),  # Akihito
-    Timestamp('1993-06-09', tz='UTC'),  # Naruhito
+    Timestamp("1959-04-10", tz="UTC"),  # Akihito
+    Timestamp("1993-06-09", tz="UTC"),  # Naruhito
 ]
 
 FuneralShowa = [
-    Timestamp('1989-02-24', tz='UTC'),
+    Timestamp("1989-02-24", tz="UTC"),
 ]
 
 EnthronementDays = [
-    Timestamp('1990-11-12', tz='UTC'),  # Akihito
-    Timestamp('2019-10-22', tz='UTC')  # Naruhito
+    Timestamp("1990-11-12", tz="UTC"),  # Akihito
+    Timestamp("2019-10-22", tz="UTC"),  # Naruhito
 ]
 
 AutumnalCitizenDates = autumnal_citizen_dates()
@@ -29,16 +33,16 @@ AutumnalCitizenDates = autumnal_citizen_dates()
 NoN225IndexPrices = [
     # source:  https://indexes.nikkei.co.jp/en/nkave/archives/data
     # TODO: determine if these dates were also national holidays
-    Timestamp('1951-02-15', tz='UTC'),
-    Timestamp('1953-02-09', tz='UTC'),
-    Timestamp('1954-10-26', tz='UTC'),
-    Timestamp('1959-04-10', tz='UTC'),
+    Timestamp("1951-02-15", tz="UTC"),
+    Timestamp("1953-02-09", tz="UTC"),
+    Timestamp("1954-10-26", tz="UTC"),
+    Timestamp("1959-04-10", tz="UTC"),
 ]
 
 EquityTradingSystemFailure = [
     # The Failure of Equity Trading System on October 1, 2020
     # source: https://www.jpx.co.jp/english/corporate/news/news-releases/0060/20201019-01.html
-    Timestamp('2020-10-01', tz='UTC'),
+    Timestamp("2020-10-01", tz="UTC"),
 ]
 
 JapanNewYearsDay2 = Holiday(
@@ -59,7 +63,7 @@ JapanComingOfAgeDay1951To1973 = Holiday(
     month=1,
     day=15,
     start_date=Timestamp(1951, 1, 1),
-    end_date=Timestamp(1973, 12, 31)
+    end_date=Timestamp(1973, 12, 31),
 )
 
 JapanComingOfAgeDay1974To1999 = Holiday(
@@ -104,17 +108,14 @@ JapanEmperorsBirthday = Holiday(
 )
 
 JapanVernalEquinox = Holiday(
-    name="Vernal Equinox",
-    month=3,
-    day=20,
-    observance=vernal_equinox
+    name="Vernal Equinox", month=3, day=20, observance=vernal_equinox
 )
 
 JapanShowaDayUntil1972 = Holiday(
     name="Showa Day",
     month=4,
     day=29,
-    end_date=Timestamp(1972, 12, 31)  # 1965
+    end_date=Timestamp(1972, 12, 31),  # 1965
 )
 
 JapanShowaDay = Holiday(
@@ -200,7 +201,8 @@ JapanMarineDay2020 = Holiday(
 )
 
 JapanMarineDay2021 = Holiday(
-    name="Marine Day",  # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
+    name="Marine Day",
+    # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
     year=2021,
     month=7,
     day=22,
@@ -231,14 +233,16 @@ JapanMountainDay2020 = Holiday(
 )
 
 JapanMountainDay2021 = Holiday(
-    name="Mountain Day",  # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
+    name="Mountain Day",
+    # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
     year=2021,
     month=8,
     day=8,
 )
 
 JapanMountainDay2021NextDay = Holiday(
-    name="Mountain Day",  # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
+    name="Mountain Day",
+    # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
     year=2021,
     month=8,
     day=9,
@@ -257,7 +261,7 @@ JapanRespectForTheAgedDay1966To1972 = Holiday(
     month=9,
     day=15,
     start_date=Timestamp(1966, 1, 1),
-    end_date=Timestamp(1972, 12, 31)
+    end_date=Timestamp(1972, 12, 31),
 )
 
 JapanRespectForTheAgedDay1973To2002 = Holiday(
@@ -320,7 +324,8 @@ JapanSportsDay2020 = Holiday(
 )
 
 JapanSportsDay2021 = Holiday(
-    name="Sports Day",  # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
+    name="Sports Day",
+    # shift for Olympics (Olympics and Paralympics postponed until 2021 due to the COVID-19 pandemic)
     year=2021,
     month=7,
     day=23,

@@ -22,6 +22,7 @@ Exchange  TASE   TASEExchangeCalendar               gabglus
 Exchange  HKEX   HKEXExchangeCalendar    Yes        1dot75cm
 Exchange  ASX    ASXExchangeCalendar                pulledlamb
 Exchange  BSE    BSEExchangeCalendar                rakesh1988
+Exchange  IEX    IEXExchangeCalendar     Yes        carterjfulcher
 ========= ====== ===================== ============ ==========
 
 Futures Calendars
@@ -31,8 +32,10 @@ Futures Calendars
 ========== ================= =================================== ============ ============
 CME        CME_Equity         CMEEquityExchangeCalendar           Yes         rsheftel
 CME        CME_Bond           CMEBondExchangeCalendar             Yes         rsheftel
-CME        CME_Agricultural   CMEAgriculturalExchangeCalendar     Yes         lionelyoung
+CME        CME_Agriculture    CMEAgriculturalExchangeCalendar     Yes         lionelyoung
 CME        CME Globex Crypto  CMEGlobexCryptoExchangeCalendar     Yes         Coinbase Asset Management
+CME        CMEGlobex_Grains   CMEGlobexGrainsExchangeCalendar     Yes         rundef
+EUREX      EUREX_Bond         EUREXFixedIncomeCalendar            Yes         rundef
 ========== ================= =================================== ============ ============
 
 Bond Market Calendars

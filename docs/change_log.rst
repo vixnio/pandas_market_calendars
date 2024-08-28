@@ -3,6 +3,36 @@ Change Log
 
 Updates
 -------
+4.4.1 ()
+~~~~~~~~~~~~~~~~~~
+- Added CME Grains calendar (CMEGlobexGrainsExchangeCalendar) from PR #333
+- Removed the Black format check from pre-commit, was causing too many errors
+- 24/7 and XTAE Calendar Fixes from PR #346
+- Changes the required python to be only 3.8 or greater, but tests will only be run for 3.9+
+- CME updated to include Juneteenth PR #337
+
+4.4.0 (02/10/2024)
+~~~~~~~~~~~~~~~~~~
+- Verified to work on pandas 2.2.0, max version changed in pyproject.toml
+- Updated minimum version of Python to 3.9
+- Corrected 2024 us sifma holidays & early closes #326
+- Added national holiday for BMF calendar (Black Awareness Day, Nov 20th) #321
+- Added BMF calendar holiday for New Year's Eve on Sunday #318
+- BSE/NSE trading holidays 2024 updated #316
+
+4.3.3 (12/30/2023)
+~~~~~~~~~~~~~~~~~~
+- PR #310 to add EUREX Fixed Income calendars
+- PR #311 to add good friday special closes for CME Globex
+
+4.3.2 (12/09/2023)
+~~~~~~~~~~~~~~~~~~
+- Reformat all code using Black and make black a standard PR #290
+- Add XNSE as a name for BSE calendar
+- Update holidays for BSE # 277
+- Update holidays for CN # 305
+- Add IEX to list of exchanges
+
 4.3.1 (09/06/2023)
 ~~~~~~~~~~~~~~~~~~
 - Fixed broken build PR #292
