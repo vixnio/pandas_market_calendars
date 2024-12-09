@@ -18,7 +18,7 @@ from abc import ABCMeta, abstractmethod
 from datetime import time
 
 import pandas as pd
-from pandas.tseries.offsets import CustomBusinessDay, Hour
+from pandas.tseries.offsets import CustomBusinessDay
 
 from .class_registry import RegisteryMeta, ProtectedDict
 
@@ -780,14 +780,16 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
                     lambda x: x.where(x.ge(x["market_open"]), x["market_open"]), axis= 1)
                 schedule.loc[_open_adj] = adjusted
 
-                if any(schedule.columns.isin(["pre", "post"])):
-                    adjusted = schedule.loc[_close_adj].apply(
-                        lambda x: x.where(x.le(x["market_close"] + Hour(4)), x["market_close"] + Hour(4)), axis= 1)  # early 'post'
-                    schedule.loc[_close_adj] = adjusted
-                else:
-                    adjusted = schedule.loc[_close_adj].apply(
-                        lambda x: x.where(x.le(x["market_close"]), x["market_close"]), axis= 1)
-                    schedule.loc[_close_adj] = adjusted
+                if not _close_adj.empty:
+                    if any(schedule.columns.isin(["pre", "post"])):
+                        h4 = pd.Timedelta(hours=4)
+                        adjusted = schedule.loc[_close_adj].apply(
+                            lambda x: x.where(x.le(x["market_close"] + h4), x["market_close"] + h4), axis= 1)  # early 'post'
+                        schedule.loc[_close_adj] = adjusted
+                    else:
+                        adjusted = schedule.loc[_close_adj].apply(
+                            lambda x: x.where(x.le(x["market_close"]), x["market_close"]), axis= 1)
+                        schedule.loc[_close_adj] = adjusted
 
         if interruptions:
             interrs = self.interruptions_df
@@ -860,7 +862,7 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
             below = day.index < timestamp
         else:
             below = day.index <= timestamp
-        return bool(day[below].iat[-1])  # returns numpy.bool_ if not bool(...)
+        return bool(day[below].iat[-1]) if below.any() else True  # returns numpy.bool_ if not bool(...)
 
     # need this to make is_open_now testable
     @staticmethod
