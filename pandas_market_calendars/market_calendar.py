@@ -788,7 +788,7 @@ class MarketCalendar(metaclass=MarketCalendarMeta):
                     lambda x: x.where(x.ge(x["market_open"]), x["market_open"]), axis= 1)
                 schedule.loc[_open_adj] = adjusted
 
-                if not _close_adj.empty:
+                if len(_close_adj) > 0:
                     if any(schedule.columns.isin(["pre", "post"])):
                         h4 = pd.Timedelta(hours=4)
                         adjusted = schedule.loc[_close_adj].apply(
